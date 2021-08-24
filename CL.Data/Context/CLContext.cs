@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace CL.Data.Context
 {
-    public class CLContext : DbContext
+    public class ClContext : DbContext
     {
         public DbSet<Cliente> Cliente { get; set; }
 
-        public CLContext(DbContextOptions options) : base(options)
+        public ClContext(DbContextOptions options) : base(options)
         {
         }
     }

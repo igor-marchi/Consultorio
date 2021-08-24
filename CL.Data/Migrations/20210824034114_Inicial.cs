@@ -13,8 +13,11 @@ namespace CL.Data.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DataNascimento = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Genero = table.Column<string>(type: "nvarchar(1)", nullable: false),
+                    Telefone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Documento = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

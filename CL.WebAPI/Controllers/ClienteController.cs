@@ -1,7 +1,9 @@
 ﻿using CL.Core.Domain;
+using CL.Manager.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CL.WebAPI.Controllers
 {
@@ -9,47 +11,53 @@ namespace CL.WebAPI.Controllers
     [ApiController]
     public class ClienteController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
-        {
-            var list = new List<Cliente>
-            {
-                new Cliente
-                {
-                    Id = 1,
-                    Name = "Claudio",
-                    BirthDate = new DateTime(1980,01,15)
-                },
-                new Cliente
-                {
-                    Id = 2,
-                    Name = "Sergio",
-                    BirthDate = new DateTime(1970,12,25)
-                }
-            };
+        private readonly IClienteManager clienteManager;
 
-            return Ok(list);
+        public ClienteController(IClienteManager clienteManager)
+        {
+            this.clienteManager = clienteManager;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Cliente>>> Get()
+        {
+            var clientes = await clienteManager.GetClientesAsync();
+
+            return Ok(clientes);
         }
 
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Cliente>> Get(long id)
         {
-            return "value";
+            var cliente = await clienteManager.GetClienteAsync(id);
+
+            return Ok(cliente);
         }
 
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult> Post([FromBody] Cliente cliente)
         {
+            var clienteCriado = await clienteManager.InsertClienteAsync(cliente);
+
+            return CreatedAtAction(nameof(Get), new { id = cliente.Id }, cliente);
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public async Task<ActionResult> Put([FromBody] Cliente cliente)
         {
+            var clienteAtualizado = await clienteManager.UpdateClienteAsync(cliente);
+
+            if (clienteAtualizado == null)
+                return NotFound();
+
+            return Ok(clienteAtualizado);
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult> Delete(long id)
         {
+            await clienteManager.DeleteClienteAsync(id);
+            return NoContent();
         }
     }
 }
