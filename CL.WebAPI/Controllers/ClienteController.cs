@@ -3,6 +3,7 @@ using CL.Core.Shared.ModelViews;
 using CL.Manager.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace CL.WebAPI.Controllers
@@ -12,10 +13,12 @@ namespace CL.WebAPI.Controllers
     public class ClienteController : ControllerBase
     {
         private readonly IClienteManager clienteManager;
+        private readonly ILogger<ClienteController> logger;
 
-        public ClienteController(IClienteManager clienteManager)
+        public ClienteController(IClienteManager clienteManager, ILogger<ClienteController> logger)
         {
             this.clienteManager = clienteManager;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -58,6 +61,7 @@ namespace CL.WebAPI.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> Post([FromBody] NovoCliente novoCliente)
         {
+            logger.LogInformation("Feita request para inserção de um novo cliente");
             var clienteCriado = await clienteManager.InsertClienteAsync(novoCliente);
 
             return CreatedAtAction(nameof(Get), new { id = clienteCriado.Id }, clienteCriado);
@@ -72,7 +76,7 @@ namespace CL.WebAPI.Controllers
         [ProducesResponseType(typeof(Cliente), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> Put([FromBody] AlteraCliente alteraCliente)
+        public async Task<IActionResult> Put([FromBody] AlteraCliente alteraCliente)
         {
             var clienteAtualizado = await clienteManager.UpdateClienteAsync(alteraCliente);
 
@@ -90,7 +94,7 @@ namespace CL.WebAPI.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(Cliente), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> Delete(long id)
+        public async Task<IActionResult> Delete(long id)
         {
             await clienteManager.DeleteClienteAsync(id);
             return NoContent();
