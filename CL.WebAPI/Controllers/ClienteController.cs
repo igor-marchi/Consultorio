@@ -1,8 +1,8 @@
 ﻿using CL.Core.Domain;
+using CL.Core.Shared.ModelViews;
 using CL.Manager.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CL.WebAPI.Controllers
@@ -18,34 +18,63 @@ namespace CL.WebAPI.Controllers
             this.clienteManager = clienteManager;
         }
 
+        /// <summary>
+        /// Busca todos os cliente consultados na base.
+        /// </summary>
+        /// <returns>Retorna todos os cliente consultados na base.</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cliente>>> Get()
+        [ProducesResponseType(typeof(Cliente), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Get()
         {
             var clientes = await clienteManager.GetClientesAsync();
 
             return Ok(clientes);
         }
 
+        /// <summary>
+        /// Busca o cliente consultado pelo id.
+        /// </summary>
+        /// <param name="id" example="1">Id do cliente.</param>
+        /// <returns>Retorna o cliente consultado pelo id.</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<Cliente>> Get(long id)
+        [ProducesResponseType(typeof(Cliente), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Get(long id)
         {
             var cliente = await clienteManager.GetClienteAsync(id);
 
             return Ok(cliente);
         }
 
+        /// <summary>
+        /// Insere um novo cliente.
+        /// </summary>
+        /// <param name="novoCliente"></param>
+        /// <returns>Retorna o cliente inserido.</returns>
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] Cliente cliente)
+        [ProducesResponseType(typeof(Cliente), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> Post([FromBody] NovoCliente novoCliente)
         {
-            var clienteCriado = await clienteManager.InsertClienteAsync(cliente);
+            var clienteCriado = await clienteManager.InsertClienteAsync(novoCliente);
 
-            return CreatedAtAction(nameof(Get), new { id = cliente.Id }, cliente);
+            return CreatedAtAction(nameof(Get), new { id = clienteCriado.Id }, clienteCriado);
         }
 
+        /// <summary>
+        /// Altera o cliente informado.
+        /// </summary>
+        /// <param name="alteraCliente"></param>
+        /// <returns>Retorna o cliente alterado.</returns>
         [HttpPut]
-        public async Task<ActionResult> Put([FromBody] Cliente cliente)
+        [ProducesResponseType(typeof(Cliente), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> Put([FromBody] AlteraCliente alteraCliente)
         {
-            var clienteAtualizado = await clienteManager.UpdateClienteAsync(cliente);
+            var clienteAtualizado = await clienteManager.UpdateClienteAsync(alteraCliente);
 
             if (clienteAtualizado == null)
                 return NotFound();
@@ -53,7 +82,14 @@ namespace CL.WebAPI.Controllers
             return Ok(clienteAtualizado);
         }
 
+        /// <summary>
+        /// Deleta um cliente.
+        /// </summary>
+        /// <param name="id" example="1">Id do cliente</param>
+        /// <remarks>Ao deletar um cliente o mesmo será excluído da base de dados</remarks>
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(Cliente), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> Delete(long id)
         {
             await clienteManager.DeleteClienteAsync(id);

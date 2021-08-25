@@ -1,16 +1,12 @@
-﻿using CL.Core.Domain;
+﻿using CL.Core.Shared.ModelViews;
 using FluentValidation;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CL.Manager.Validator
 {
-    public class ClienteValidator : AbstractValidator<Cliente>
+    public class NovoClienteValidator : AbstractValidator<NovoCliente>
     {
-        public ClienteValidator()
+        public NovoClienteValidator()
         {
             RuleFor(x => x.Nome)
                 .NotNull()
@@ -45,7 +41,8 @@ namespace CL.Manager.Validator
 
         private bool ValidaGenero(char sexo)
         {
-            return sexo == 'M' || sexo == 'F';
+            var sexoUpper = Char.ToUpper(sexo);
+            return sexoUpper == 'M' || sexoUpper == 'F';
         }
     }
 }

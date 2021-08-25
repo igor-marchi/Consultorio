@@ -15,5 +15,9 @@ namespace CL.Core.Domain
         public string Telefone { get; set; }
 
         public string Documento { get; set; }
+
+        public DateTime DataCriacao { get; set; }
+
+        public DateTime? UltimaAtualizacao { get; set; }
     }
 }
