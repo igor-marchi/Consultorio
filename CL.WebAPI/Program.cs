@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using System;
+using System.IO;
 
 namespace CL.WebAPI
 {
@@ -9,11 +11,9 @@ namespace CL.WebAPI
     {
         public static void Main(string[] args)
         {
-            Log.Logger = new LoggerConfiguration()
-                .Enrich.FromLogContext()
-                .WriteTo.Console()
-                //.WriteTo.File("log.txt", fileSizeLimitBytes: 100000, rollOnFileSizeLimit: true, rollingInterval: RollingInterval.Day)
-                .CreateLogger();
+            IConfigurationRoot configuration = GetConfiguration();
+
+            ConfiguraLog(configuration);
 
             try
             {
@@ -30,6 +30,25 @@ namespace CL.WebAPI
             {
                 Log.CloseAndFlush();
             }
+        }
+
+        private static void ConfiguraLog(IConfigurationRoot configuration)
+        {
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
+        }
+
+        private static IConfigurationRoot GetConfiguration()
+        {
+            string ambiente = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile($"appsettings.json")
+                .AddJsonFile($"appsettings.{ambiente}.json")
+                .Build();
+            return configuration;
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
