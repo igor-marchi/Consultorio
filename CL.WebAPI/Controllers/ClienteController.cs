@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SerilogTimings;
+using System;
 using System.Threading.Tasks;
 
 namespace CL.WebAPI.Controllers
@@ -62,10 +63,13 @@ namespace CL.WebAPI.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> Post([FromBody] NovoCliente novoCliente)
         {
+            logger.LogInformation($"Objeto recebido {@novoCliente}", novoCliente);
+
             Cliente clienteCriado;
 
             using (Operation.Time("Tempo de adição de um novo cliente."))
             {
+                throw new Exception("Erro grandão");
                 logger.LogInformation("Feita request para inserção de um novo cliente");
                 clienteCriado = await clienteManager.InsertClienteAsync(novoCliente);
             };
