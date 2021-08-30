@@ -19,5 +19,7 @@ namespace CL.Core.Domain
         public DateTime DataCriacao { get; set; }
 
         public DateTime? UltimaAtualizacao { get; set; }
+
+        public Endereco Endereco { get; set; }
     }
 }

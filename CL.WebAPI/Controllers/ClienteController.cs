@@ -69,7 +69,6 @@ namespace CL.WebAPI.Controllers
 
             using (Operation.Time("Tempo de adição de um novo cliente."))
             {
-                throw new Exception("Erro grandão");
                 logger.LogInformation("Feita request para inserção de um novo cliente");
                 clienteCriado = await clienteManager.InsertClienteAsync(novoCliente);
             };

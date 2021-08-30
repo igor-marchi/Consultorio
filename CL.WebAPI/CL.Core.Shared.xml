@@ -50,5 +50,41 @@
             </summary>
             <example>12345678</example>
         </member>
+        <member name="P:CL.Core.Shared.ModelViews.NovoEndereco.CEP">
+            <summary>
+            Código postal da sua cidade
+            </summary>
+            <example>99370000</example>
+        </member>
+        <member name="P:CL.Core.Shared.ModelViews.NovoEndereco.Estado">
+            <summary>
+            Estado de origem
+            </summary>
+            <example>SantaCatarina</example>
+        </member>
+        <member name="P:CL.Core.Shared.ModelViews.NovoEndereco.Cidade">
+            <summary>
+            Cidade de origem
+            </summary>
+            <example>Brusque</example>
+        </member>
+        <member name="P:CL.Core.Shared.ModelViews.NovoEndereco.Logradouro">
+            <summary>
+            Logradouro
+            </summary>
+            <example>Rua Aurea</example>
+        </member>
+        <member name="P:CL.Core.Shared.ModelViews.NovoEndereco.Numero">
+            <summary>
+            Número da residência
+            </summary>
+            <example>1055</example>
+        </member>
+        <member name="P:CL.Core.Shared.ModelViews.NovoEndereco.Complemento">
+            <summary>
+            Complemento do endereço
+            </summary>
+            <example>Próximo ao poste do Caju</example>
+        </member>
     </members>
 </doc>

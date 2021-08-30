@@ -37,6 +37,8 @@ namespace CL.Manager.Validator
                 .NotEmpty()
                 .Must(ValidaGenero)
                     .WithMessage("Genero precisa ser M ou F");
+
+            RuleFor(x => x.Endereco).SetValidator(new NovoEnderecoValidator());
         }
 
         private bool ValidaGenero(char sexo)
