@@ -1,4 +1,6 @@
-﻿using CL.Manager.Validator;
+﻿using CL.Manager.Validator.Cliente;
+using CL.Manager.Validator.Endereco;
+using CL.Manager.Validator.Telefone;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;

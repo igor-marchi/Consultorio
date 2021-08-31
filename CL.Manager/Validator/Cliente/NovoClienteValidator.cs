@@ -1,8 +1,10 @@
 ﻿using CL.Core.Shared.ModelViews;
+using CL.Core.Shared.ModelViews.Cliente;
+using CL.Manager.Validator.Endereco;
 using FluentValidation;
 using System;
 
-namespace CL.Manager.Validator
+namespace CL.Manager.Validator.Cliente
 {
     public class NovoClienteValidator : AbstractValidator<NovoCliente>
     {

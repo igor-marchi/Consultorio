@@ -1,7 +1,7 @@
-﻿using CL.Core.Shared.ModelViews;
+﻿using CL.Core.Shared.ModelViews.Endereco;
 using FluentValidation;
 
-namespace CL.Manager.Validator
+namespace CL.Manager.Validator.Endereco
 {
     public class NovoEnderecoValidator : AbstractValidator<NovoEndereco>
     {

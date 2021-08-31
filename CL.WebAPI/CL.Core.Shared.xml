@@ -4,83 +4,83 @@
         <name>CL.Core.Shared</name>
     </assembly>
     <members>
-        <member name="T:CL.Core.Shared.ModelViews.AlteraCliente">
+        <member name="T:CL.Core.Shared.ModelViews.Cliente.AlteraCliente">
             <summary>
             Objeto utilizado para alteração de um cliente
             </summary>
         </member>
-        <member name="P:CL.Core.Shared.ModelViews.AlteraCliente.Id">
+        <member name="P:CL.Core.Shared.ModelViews.Cliente.AlteraCliente.Id">
             <summary>
             Id cliente na base de dados
             </summary>
             <example>1</example>
         </member>
-        <member name="T:CL.Core.Shared.ModelViews.NovoCliente">
+        <member name="T:CL.Core.Shared.ModelViews.Cliente.NovoCliente">
             <summary>
             Objeto utilizado para inserção de um cliente
             </summary>
         </member>
-        <member name="P:CL.Core.Shared.ModelViews.NovoCliente.Nome">
+        <member name="P:CL.Core.Shared.ModelViews.Cliente.NovoCliente.Nome">
             <summary>
             Nome do cliente
             </summary>
             <example>Fulano de Tal</example>
         </member>
-        <member name="P:CL.Core.Shared.ModelViews.NovoCliente.DataNascimento">
+        <member name="P:CL.Core.Shared.ModelViews.Cliente.NovoCliente.DataNascimento">
             <summary>
             Data de nascimento do cliente
             </summary>
             <example>1980-01-01</example>
         </member>
-        <member name="P:CL.Core.Shared.ModelViews.NovoCliente.Genero">
+        <member name="P:CL.Core.Shared.ModelViews.Cliente.NovoCliente.Genero">
             <summary>
             Sexo cliente
             </summary>
             <example>M</example>
         </member>
-        <member name="P:CL.Core.Shared.ModelViews.NovoCliente.Documento">
+        <member name="P:CL.Core.Shared.ModelViews.Cliente.NovoCliente.Documento">
             <summary>
             Documento do cliente: CNH, CPF ou RG
             </summary>
             <example>12345678</example>
         </member>
-        <member name="P:CL.Core.Shared.ModelViews.NovoEndereco.CEP">
+        <member name="P:CL.Core.Shared.ModelViews.Endereco.NovoEndereco.CEP">
             <summary>
             Código postal da sua cidade
             </summary>
             <example>99370000</example>
         </member>
-        <member name="P:CL.Core.Shared.ModelViews.NovoEndereco.Estado">
+        <member name="P:CL.Core.Shared.ModelViews.Endereco.NovoEndereco.Estado">
             <summary>
             Estado de origem
             </summary>
             <example>SantaCatarina</example>
         </member>
-        <member name="P:CL.Core.Shared.ModelViews.NovoEndereco.Cidade">
+        <member name="P:CL.Core.Shared.ModelViews.Endereco.NovoEndereco.Cidade">
             <summary>
             Cidade de origem
             </summary>
             <example>Brusque</example>
         </member>
-        <member name="P:CL.Core.Shared.ModelViews.NovoEndereco.Logradouro">
+        <member name="P:CL.Core.Shared.ModelViews.Endereco.NovoEndereco.Logradouro">
             <summary>
             Logradouro
             </summary>
             <example>Rua Aurea</example>
         </member>
-        <member name="P:CL.Core.Shared.ModelViews.NovoEndereco.Numero">
+        <member name="P:CL.Core.Shared.ModelViews.Endereco.NovoEndereco.Numero">
             <summary>
             Número da residência
             </summary>
             <example>1055</example>
         </member>
-        <member name="P:CL.Core.Shared.ModelViews.NovoEndereco.Complemento">
+        <member name="P:CL.Core.Shared.ModelViews.Endereco.NovoEndereco.Complemento">
             <summary>
             Complemento do endereço
             </summary>
             <example>Próximo ao poste do Caju</example>
         </member>
-        <member name="P:CL.Core.Shared.ModelViews.NovoTelefone.Numero">
+        <member name="P:CL.Core.Shared.ModelViews.Telefone.NovoTelefone.Numero">
             <summary>
             Telefone do cliente
             </summary>

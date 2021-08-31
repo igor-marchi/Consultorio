@@ -1,7 +1,7 @@
-﻿using CL.Core.Shared.ModelViews;
+﻿using CL.Core.Shared.ModelViews.Cliente;
 using FluentValidation;
 
-namespace CL.Manager.Validator
+namespace CL.Manager.Validator.Cliente
 {
     public class AlteraClienteValidator : AbstractValidator<AlteraCliente>
     {

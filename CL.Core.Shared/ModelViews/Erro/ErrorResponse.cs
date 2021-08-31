@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CL.Core.Shared.ModelViews
+namespace CL.Core.Shared.ModelViews.Erro
 {
     public class ErrorResponse
     {
@@ -15,7 +15,6 @@ namespace CL.Core.Shared.ModelViews
         public string Id { get; set; }
 
         public string RequestId { get; set; }
-
 
         public DateTime Date { get; set; }
 

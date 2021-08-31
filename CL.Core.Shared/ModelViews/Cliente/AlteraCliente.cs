@@ -1,5 +1,4 @@
-﻿
-namespace CL.Core.Shared.ModelViews
+﻿namespace CL.Core.Shared.ModelViews.Cliente
 {
     /// <summary>
     /// Objeto utilizado para alteração de um cliente

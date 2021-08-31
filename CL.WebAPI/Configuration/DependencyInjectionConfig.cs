@@ -1,6 +1,7 @@
 ﻿using CL.Data.Repository;
 using CL.Manager.Implementation;
-using CL.Manager.Interfaces;
+using CL.Manager.Interfaces.Manager;
+using CL.Manager.Interfaces.Repository;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CL.WebAPI.Configuration

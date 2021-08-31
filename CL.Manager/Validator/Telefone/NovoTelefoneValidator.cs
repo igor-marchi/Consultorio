@@ -1,12 +1,7 @@
-﻿using CL.Core.Shared.ModelViews;
+﻿using CL.Core.Shared.ModelViews.Telefone;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CL.Manager.Validator
+namespace CL.Manager.Validator.Telefone
 {
     public class NovoTelefoneValidator : AbstractValidator<NovoTelefone>
     {
