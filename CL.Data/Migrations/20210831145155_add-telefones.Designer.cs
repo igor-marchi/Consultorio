@@ -4,14 +4,16 @@ using CL.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CL.Data.Migrations
 {
     [DbContext(typeof(ClContext))]
-    partial class ClContextModelSnapshot : ModelSnapshot
+    [Migration("20210831145155_add-telefones")]
+    partial class addtelefones
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,39 +82,6 @@ namespace CL.Data.Migrations
                     b.ToTable("Endereco");
                 });
 
-            modelBuilder.Entity("CL.Core.Domain.Especialidade", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Especialidade");
-                });
-
-            modelBuilder.Entity("CL.Core.Domain.Medico", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CRM")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Medico");
-                });
-
             modelBuilder.Entity("CL.Core.Domain.Telefone", b =>
                 {
                     b.Property<long>("ClienteId")
@@ -124,21 +93,6 @@ namespace CL.Data.Migrations
                     b.HasKey("ClienteId", "Numero");
 
                     b.ToTable("Telefone");
-                });
-
-            modelBuilder.Entity("EspecialidadeMedico", b =>
-                {
-                    b.Property<int>("EspecialidadesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MedicosId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EspecialidadesId", "MedicosId");
-
-                    b.HasIndex("MedicosId");
-
-                    b.ToTable("EspecialidadeMedico");
                 });
 
             modelBuilder.Entity("CL.Core.Domain.Endereco", b =>
@@ -161,21 +115,6 @@ namespace CL.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Cliente");
-                });
-
-            modelBuilder.Entity("EspecialidadeMedico", b =>
-                {
-                    b.HasOne("CL.Core.Domain.Especialidade", null)
-                        .WithMany()
-                        .HasForeignKey("EspecialidadesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CL.Core.Domain.Medico", null)
-                        .WithMany()
-                        .HasForeignKey("MedicosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("CL.Core.Domain.Cliente", b =>

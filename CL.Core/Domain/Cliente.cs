@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CL.Core.Domain
 {
@@ -12,7 +13,7 @@ namespace CL.Core.Domain
 
         public char Genero { get; set; }
 
-        public string Telefone { get; set; }
+        public ICollection<Telefone> Telefones { get; set; }
 
         public string Documento { get; set; }
 

@@ -26,11 +26,9 @@ namespace CL.Manager.Validator
                 .MinimumLength(4)
                 .MaximumLength(14);
 
-            RuleFor(x => x.Telefone)
+            RuleFor(x => x.Telefones)
                 .NotNull()
-                .NotEmpty()
-                .Matches("[2-9][0-9]{10}")
-                    .WithMessage("Telefone deve ter o formato [2-9][0-9]{10}");
+                .NotEmpty();
 
             RuleFor(x => x.Genero)
                 .NotNull()

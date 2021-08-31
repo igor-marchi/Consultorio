@@ -38,12 +38,6 @@
             </summary>
             <example>M</example>
         </member>
-        <member name="P:CL.Core.Shared.ModelViews.NovoCliente.Telefone">
-            <summary>
-            Telefone do cliente
-            </summary>
-            <example>48984848484</example>
-        </member>
         <member name="P:CL.Core.Shared.ModelViews.NovoCliente.Documento">
             <summary>
             Documento do cliente: CNH, CPF ou RG
@@ -85,6 +79,12 @@
             Complemento do endereço
             </summary>
             <example>Próximo ao poste do Caju</example>
+        </member>
+        <member name="P:CL.Core.Shared.ModelViews.NovoTelefone.Numero">
+            <summary>
+            Telefone do cliente
+            </summary>
+            <example>48984848484</example>
         </member>
     </members>
 </doc>
