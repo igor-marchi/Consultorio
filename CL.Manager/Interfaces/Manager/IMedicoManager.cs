@@ -1,15 +1,12 @@
 ﻿using CL.Core.Shared.ModelViews.Medico;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CL.Manager.Interfaces.Manager
 {
     public interface IMedicoManager
     {
-        Task<MedicoView> GetMedicosAsync();
+        Task<IEnumerable<MedicoView>> GetMedicosAsync();
 
         Task<MedicoView> GetMedicoAsync(int id);
 

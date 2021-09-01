@@ -10,9 +10,13 @@ namespace CL.WebAPI.Configuration
     {
         public static void AddSDependencyInjectionConfiguration(this IServiceCollection services)
         {
-            //Repository
+            // Manager
             services.AddScoped<IClienteManager, ClienteManager>();
+            services.AddScoped<IMedicoManager, MedicoManager>();
+
+            //Repository
             services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IMedicoRepository, MedicoRepository>();
         }
     }
 }

@@ -32,14 +32,53 @@ namespace CL.Data.Repository
                 .SingleOrDefaultAsync(p => p.Id == id);
         }
 
-        public async Task<Medico> InsertMedicoAsync(Cliente cliente)
+        public async Task<Medico> InsertMedicoAsync(Medico medico)
         {
-            throw new NotImplementedException();
+            await InsertMedicoEspeciliade(medico);
+            await context.Medico.AddAsync(medico);
+
+            await context.SaveChangesAsync();
+
+            return medico;
         }
 
-        public async Task<Medico> UpdateMedicoAsync(Cliente cliente)
+        private async Task InsertMedicoEspeciliade(Medico medico)
         {
-            throw new NotImplementedException();
+            var especialidadesConsultadas = new List<Especialidade>();
+            foreach (var especialidade in medico.Especialidades)
+            {
+                var especialidadeConsultada = await context.Especialidade.FirstAsync(x => x.Id == especialidade.Id);
+                especialidadesConsultadas.Add(especialidadeConsultada);
+            }
+
+            medico.Especialidades = especialidadesConsultadas;
+        }
+
+        public async Task<Medico> UpdateMedicoAsync(Medico medico)
+        {
+            var medicoConsultado = await context.Medico
+                                            .Include(x => x.Especialidades)
+                                            .SingleOrDefaultAsync(x => x.Id == medico.Id);
+
+            if (medicoConsultado == null)
+                return null;
+
+            await UpdateMedicoEspecialidades(medico, medicoConsultado);
+            await context.SaveChangesAsync();
+
+            return medicoConsultado;
+        }
+
+        private async Task UpdateMedicoEspecialidades(Medico medico, Medico medicoConsultado)
+        {
+            var especialidadesConsultadas = new List<Especialidade>();
+            foreach (var especialidade in medico.Especialidades)
+            {
+                var especoalidadeConsultada = await context.Especialidade.FindAsync(especialidade.Id);
+                especialidadesConsultadas.Add(especoalidadeConsultada);
+            }
+
+            medicoConsultado.Especialidades = especialidadesConsultadas;
         }
 
         public async Task DeleteMedicoAsync(long id)
