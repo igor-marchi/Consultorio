@@ -2,10 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CL.Data.Configuration
 {
@@ -14,6 +10,9 @@ namespace CL.Data.Configuration
         public void Configure(EntityTypeBuilder<Endereco> builder)
         {
             builder.HasKey(p => p.ClienteId);
+
+            builder.Property(x => x.Estado)
+                .HasConversion(p => p.ToString(), p => (Estado)Enum.Parse(typeof(Estado), p));
         }
     }
 }

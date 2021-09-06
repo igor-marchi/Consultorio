@@ -6,7 +6,7 @@
 
         public int CEP { get; set; }
 
-        public string Estado { get; set; }
+        public Estado Estado { get; set; }
 
         public string Cidade { get; set; }
 

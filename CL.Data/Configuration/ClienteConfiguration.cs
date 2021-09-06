@@ -1,6 +1,7 @@
 ﻿using CL.Core.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace CL.Data.Configuratio
 {
@@ -11,6 +12,9 @@ namespace CL.Data.Configuratio
             builder.Property(x => x.Nome)
                 .HasMaxLength(200)
                 .IsRequired();
+
+            builder.Property(x => x.Genero)
+                .HasConversion(p => p.ToString(), p => (Genero)Enum.Parse(typeof(Genero), p));
         }
     }
 }

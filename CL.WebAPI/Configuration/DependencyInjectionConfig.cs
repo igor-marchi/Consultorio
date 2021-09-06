@@ -17,6 +17,7 @@ namespace CL.WebAPI.Configuration
             //Repository
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IMedicoRepository, MedicoRepository>();
+            services.AddScoped<IEspecialidadeRepository, EspecialidadeRespository>();
         }
     }
 }

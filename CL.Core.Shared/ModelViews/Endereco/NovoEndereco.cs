@@ -11,8 +11,7 @@
         /// <summary>
         /// Estado de origem
         /// </summary>
-        /// <example>SantaCatarina</example>
-        public string Estado { get; set; }
+        public EstadoView Estado { get; set; }
 
         /// <summary>
         /// Cidade de origem

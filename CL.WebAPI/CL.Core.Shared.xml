@@ -54,7 +54,6 @@
             <summary>
             Estado de origem
             </summary>
-            <example>SantaCatarina</example>
         </member>
         <member name="P:CL.Core.Shared.ModelViews.Endereco.NovoEndereco.Cidade">
             <summary>

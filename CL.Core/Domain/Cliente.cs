@@ -11,7 +11,7 @@ namespace CL.Core.Domain
 
         public DateTime DataNascimento { get; set; }
 
-        public char Genero { get; set; }
+        public Genero Genero { get; set; }
 
         public ICollection<Telefone> Telefones { get; set; }
 

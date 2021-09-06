@@ -33,18 +33,9 @@ namespace CL.Manager.Validator.Cliente
                 .NotEmpty();
 
             RuleFor(x => x.Genero)
-                .NotNull()
-                .NotEmpty()
-                .Must(ValidaGenero)
-                    .WithMessage("Genero precisa ser M ou F");
+                .NotNull();
 
             RuleFor(x => x.Endereco).SetValidator(new NovoEnderecoValidator());
-        }
-
-        private bool ValidaGenero(char sexo)
-        {
-            var sexoUpper = Char.ToUpper(sexo);
-            return sexoUpper == 'M' || sexoUpper == 'F';
         }
     }
 }
