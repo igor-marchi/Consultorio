@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CL.WebAPI</name>
+    </assembly>
+    <members>
+        <member name="M:CL.WebAPI.Controllers.ClienteController.Get">
+            <summary>
+            Busca todos os cliente consultados na base.
+            </summary>
+            <returns>Retorna todos os cliente consultados na base.</returns>
+        </member>
+        <member name="M:CL.WebAPI.Controllers.ClienteController.Get(System.Int64)">
+            <summary>
+            Busca o cliente consultado pelo id.
+            </summary>
+            <param name="id" example="1">Id do cliente.</param>
+            <returns>Retorna o cliente consultado pelo id.</returns>
+        </member>
+        <member name="M:CL.WebAPI.Controllers.ClienteController.Post(CL.Core.Shared.ModelViews.Cliente.NovoCliente)">
+            <summary>
+            Insere um novo cliente.
+            </summary>
+            <param name="novoCliente"></param>
+            <returns>Retorna o cliente inserido.</returns>
+        </member>
+        <member name="M:CL.WebAPI.Controllers.ClienteController.Put(CL.Core.Shared.ModelViews.Cliente.AlteraCliente)">
+            <summary>
+            Altera o cliente informado.
+            </summary>
+            <param name="alteraCliente"></param>
+            <returns>Retorna o cliente alterado.</returns>
+        </member>
+        <member name="M:CL.WebAPI.Controllers.ClienteController.Delete(System.Int64)">
+            <summary>
+            Deleta um cliente.
+            </summary>
+            <param name="id" example="1">Id do cliente</param>
+            <remarks>Ao deletar um cliente o mesmo será excluído da base de dados</remarks>
+        </member>
+        <member name="M:CL.WebAPI.Controllers.MedicoController.Get">
+            <summary>
+            Retorna todos os médicos.
+            </summary>
+        </member>
+        <member name="M:CL.WebAPI.Controllers.MedicoController.Get(System.Int32)">
+            <summary>
+            Retorna um médico consultado via ID
+            </summary>
+            <param name="id" example="123">Id do médico</param>
+        </member>
+        <member name="M:CL.WebAPI.Controllers.MedicoController.Post(CL.Core.Shared.ModelViews.Medico.NovoMedico)">
+            <summary>
+            Insere um novo médico.
+            </summary>
+            <param name="medico"></param>
+        </member>
+        <member name="M:CL.WebAPI.Controllers.MedicoController.Put(CL.Core.Shared.ModelViews.Medico.AlteraMedico)">
+            <summary>
+            Altera um médico
+            </summary>
+        </member>
+        <member name="M:CL.WebAPI.Controllers.MedicoController.DeleteAsync(System.Int32)">
+            <summary>
+            Exclui um médico.
+            </summary>
+            <param name="id" example="123">Id do médico</param>
+        </member>
+    </members>
+</doc>

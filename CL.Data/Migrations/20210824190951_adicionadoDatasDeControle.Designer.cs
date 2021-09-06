@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CL.Data.Migrations
 {
-    [DbContext(typeof(CLContext))]
-    [Migration("20210820024819_Inicial")]
-    partial class Inicial
+    [DbContext(typeof(ClContext))]
+    [Migration("20210824190951_adicionadoDatasDeControle")]
+    partial class adicionadoDatasDeControle
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,11 +28,27 @@ namespace CL.Data.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
+                    b.Property<DateTime>("DataNascimento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Documento")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Genero")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UltimaAtualizacao")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

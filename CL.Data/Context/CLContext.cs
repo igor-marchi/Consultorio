@@ -1,19 +1,28 @@
 ﻿using CL.Core.Domain;
+using CL.Data.Configuratio;
+using CL.Data.Configuration;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CL.Data.Context
 {
-    public class CLContext : DbContext
+    public class ClContext : DbContext
     {
         public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<Endereco> Endereco { get; set; }
+        public DbSet<Telefone> Telefone { get; set; }
+        public DbSet<Medico> Medico { get; set; }
+        public DbSet<Especialidade> Especialidade { get; set; }
 
-        public CLContext(DbContextOptions options) : base(options)
+        public ClContext(DbContextOptions options) : base(options)
+        { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new ClienteConfiguration());
+            modelBuilder.ApplyConfiguration(new EnderecoConfiguration());
+            modelBuilder.ApplyConfiguration(new TelefoneConfiguration());
         }
     }
 }

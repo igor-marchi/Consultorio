@@ -1,18 +1,9 @@
-using CL.Data.Context;
+using CL.WebAPI.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CL.WebAPI
 {
@@ -29,33 +20,26 @@ namespace CL.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
-            services.AddDbContext<CLContext>(oprtions => oprtions.UseSqlServer(Configuration.GetConnectionString("ClConnection")));
-
-            services.AddSwaggerGen(configs =>
-            {
-                configs.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Title = "Consultório",
-                    Version = "v1",
-                });
-            });
+            services.AddFluentValidationConfiguration();
+            services.AddDataBaseConfiguration(Configuration);
+            services.AddAutoMapperConfiguration();
+            services.AddSDependencyInjectionConfiguration();
+            services.AddSwaggerConfiguration();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseExceptionHandler("/error");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSwagger();
-            app.UseSwaggerUI(configs =>
-            {
-                configs.RoutePrefix = string.Empty;
-                configs.SwaggerEndpoint("./swagger/v1/swagger.json", "CL V1");
-            });
+            app.UseDataBaseConfiguration();
+
+            app.UseSwaggerConfiguration();
 
             app.UseHttpsRedirection();
 

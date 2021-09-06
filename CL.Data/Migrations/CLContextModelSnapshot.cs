@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CL.Data.Migrations
 {
-    [DbContext(typeof(CLContext))]
-    partial class CLContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ClContext))]
+    partial class ClContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -26,15 +26,164 @@ namespace CL.Data.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
+                    b.Property<DateTime>("DataNascimento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Documento")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Genero")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime?>("UltimaAtualizacao")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.ToTable("Cliente");
+                });
+
+            modelBuilder.Entity("CL.Core.Domain.Endereco", b =>
+                {
+                    b.Property<long>("ClienteId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("CEP")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Cidade")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Complemento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Logradouro")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Numero")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ClienteId");
+
+                    b.ToTable("Endereco");
+                });
+
+            modelBuilder.Entity("CL.Core.Domain.Especialidade", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Especialidade");
+                });
+
+            modelBuilder.Entity("CL.Core.Domain.Medico", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CRM")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Medico");
+                });
+
+            modelBuilder.Entity("CL.Core.Domain.Telefone", b =>
+                {
+                    b.Property<long>("ClienteId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Numero")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ClienteId", "Numero");
+
+                    b.ToTable("Telefone");
+                });
+
+            modelBuilder.Entity("EspecialidadeMedico", b =>
+                {
+                    b.Property<int>("EspecialidadesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MedicosId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EspecialidadesId", "MedicosId");
+
+                    b.HasIndex("MedicosId");
+
+                    b.ToTable("EspecialidadeMedico");
+                });
+
+            modelBuilder.Entity("CL.Core.Domain.Endereco", b =>
+                {
+                    b.HasOne("CL.Core.Domain.Cliente", "Cliente")
+                        .WithOne("Endereco")
+                        .HasForeignKey("CL.Core.Domain.Endereco", "ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+                });
+
+            modelBuilder.Entity("CL.Core.Domain.Telefone", b =>
+                {
+                    b.HasOne("CL.Core.Domain.Cliente", "Cliente")
+                        .WithMany("Telefones")
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+                });
+
+            modelBuilder.Entity("EspecialidadeMedico", b =>
+                {
+                    b.HasOne("CL.Core.Domain.Especialidade", null)
+                        .WithMany()
+                        .HasForeignKey("EspecialidadesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CL.Core.Domain.Medico", null)
+                        .WithMany()
+                        .HasForeignKey("MedicosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CL.Core.Domain.Cliente", b =>
+                {
+                    b.Navigation("Endereco");
+
+                    b.Navigation("Telefones");
                 });
 #pragma warning restore 612, 618
         }
