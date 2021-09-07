@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SerilogTimings;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CL.WebAPI.Controllers
@@ -35,6 +36,8 @@ namespace CL.WebAPI.Controllers
         public async Task<IActionResult> Get()
         {
             var clientes = await clienteManager.GetClientesAsync();
+
+            if (!clientes.Any()) return NotFound();
 
             return Ok(clientes);
         }
