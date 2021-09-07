@@ -31,7 +31,7 @@ namespace CL.WebAPI.Controllers
         /// </summary>
         /// <returns>Retorna todos os cliente consultados na base.</returns>
         [HttpGet]
-        [ProducesResponseType(typeof(Cliente), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ClienteView), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get()
         {
@@ -48,7 +48,7 @@ namespace CL.WebAPI.Controllers
         /// <param name="id" example="1">Id do cliente.</param>
         /// <returns>Retorna o cliente consultado pelo id.</returns>
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(Cliente), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ClienteView), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get(long id)
@@ -64,13 +64,13 @@ namespace CL.WebAPI.Controllers
         /// <param name="novoCliente"></param>
         /// <returns>Retorna o cliente inserido.</returns>
         [HttpPost]
-        [ProducesResponseType(typeof(Cliente), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ClienteView), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> Post([FromBody] NovoCliente novoCliente)
         {
             logger.LogInformation($"Objeto recebido {@novoCliente}", novoCliente);
 
-            Cliente clienteCriado;
+            ClienteView clienteCriado;
 
             using (Operation.Time("Tempo de adição de um novo cliente."))
             {
@@ -87,7 +87,7 @@ namespace CL.WebAPI.Controllers
         /// <param name="alteraCliente"></param>
         /// <returns>Retorna o cliente alterado.</returns>
         [HttpPut]
-        [ProducesResponseType(typeof(Cliente), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ClienteView), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Put([FromBody] AlteraCliente alteraCliente)
@@ -106,7 +106,7 @@ namespace CL.WebAPI.Controllers
         /// <param name="id" example="1">Id do cliente</param>
         /// <remarks>Ao deletar um cliente o mesmo será excluído da base de dados</remarks>
         [HttpDelete("{id}")]
-        [ProducesResponseType(typeof(Cliente), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ClienteView), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Delete(long id)
         {

@@ -19,14 +19,17 @@ namespace CL.Manager.Implementation
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<Cliente>> GetClientesAsync()
+        public async Task<IEnumerable<ClienteView>> GetClientesAsync()
         {
-            return await clienteRepository.GetClientesAsync();
+            var clientes = await clienteRepository.GetClientesAsync();
+
+            return mapper.Map<IEnumerable<ClienteView>>(clientes);
         }
 
-        public async Task<Cliente> GetClienteAsync(long id)
+        public async Task<ClienteView> GetClienteAsync(long id)
         {
-            return await clienteRepository.GetClienteAsync(id);
+            var cliente = await clienteRepository.GetClienteAsync(id);
+            return mapper.Map<ClienteView>(cliente);
         }
 
         public async Task DeleteClienteAsync(long id)
@@ -34,16 +37,20 @@ namespace CL.Manager.Implementation
             await clienteRepository.DeleteClienteAsync(id);
         }
 
-        public async Task<Cliente> InsertClienteAsync(NovoCliente novoCliente)
+        public async Task<ClienteView> InsertClienteAsync(NovoCliente novoCliente)
         {
             var cliente = mapper.Map<Cliente>(novoCliente);
-            return await clienteRepository.InsertClienteAsync(cliente);
+            cliente = await clienteRepository.InsertClienteAsync(cliente);
+
+            return mapper.Map<ClienteView>(cliente);
         }
 
-        public async Task<Cliente> UpdateClienteAsync(AlteraCliente alteraCliente)
+        public async Task<ClienteView> UpdateClienteAsync(AlteraCliente alteraCliente)
         {
             var cliente = mapper.Map<Cliente>(alteraCliente);
-            return await clienteRepository.UpdateClienteAsync(cliente);
+            cliente = await clienteRepository.UpdateClienteAsync(cliente);
+
+            return mapper.Map<ClienteView>(cliente);
         }
     }
 }

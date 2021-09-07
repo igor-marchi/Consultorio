@@ -1,4 +1,4 @@
-﻿using CL.Core.Domain;
+﻿using CL.Core.Shared.ModelViews.Cliente;
 using CL.FakeData.ClienteData;
 using CL.Manager.Interfaces.Manager;
 using CL.WebAPI.Controllers;
@@ -18,8 +18,8 @@ namespace CL.WebApi.Tests.Controllers
         private readonly IClienteManager clienteManager;
         private readonly ILogger<ClienteController> logger;
         private readonly ClienteController clientecontroller;
-        private readonly Cliente cliente;
-        private readonly List<Cliente> lstCliente;
+        private readonly ClienteView cliente;
+        private readonly List<ClienteView> listaClienteView;
 
         public ClienteControllerTests()
         {
@@ -28,17 +28,20 @@ namespace CL.WebApi.Tests.Controllers
             clientecontroller = new ClienteController(clienteManager, logger);
 
             cliente = new ClienteViewFaker().Generate();
-            lstCliente = new ClienteViewFaker().Generate(10);
+            listaClienteView = new ClienteViewFaker().Generate(10);
         }
 
         [Fact]
         public async Task Get_Ok()
         {
-            clienteManager.GetClientesAsync().Returns(lstCliente);
+            var controle = new List<ClienteView>();
+            listaClienteView.ForEach(p => controle.Add(p.CloneTipado()));
+
+            clienteManager.GetClientesAsync().Returns(listaClienteView);
             var result = (ObjectResult)await clientecontroller.Get();
 
             result.StatusCode.Should().Be(StatusCodes.Status200OK);
-            result.Value.Should().BeEquivalentTo(lstCliente);
+            result.Value.Should().BeEquivalentTo(controle);
         }
     }
 }
