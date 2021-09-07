@@ -25,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CL.Core.Shared\CL.Core.Shared.csproj" />
     <ProjectReference Include="..\CL.Core\CL.Core.csproj" />
+    <ProjectReference Include="..\CL.FakeData\CL.FakeData.csproj" />
     <ProjectReference Include="..\CL.Manager\CL.Manager.csproj" />
     <ProjectReference Include="..\CL.WebAPI\CL.WebAPI.csproj" />
   </ItemGroup>
