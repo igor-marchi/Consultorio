@@ -1,5 +1,4 @@
-﻿using CL.Core.Shared.ModelViews;
-using CL.Core.Shared.ModelViews.Cliente;
+﻿using CL.Core.Shared.ModelViews.Cliente;
 using CL.Manager.Validator.Endereco;
 using FluentValidation;
 using System;

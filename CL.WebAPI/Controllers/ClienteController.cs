@@ -32,6 +32,7 @@ namespace CL.WebAPI.Controllers
         /// <returns>Retorna todos os cliente consultados na base.</returns>
         [HttpGet]
         [ProducesResponseType(typeof(ClienteView), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get()
         {
@@ -55,6 +56,8 @@ namespace CL.WebAPI.Controllers
         {
             var cliente = await clienteManager.GetClienteAsync(id);
 
+            if (cliente.Id == 0) return NotFound();
+
             return Ok(cliente);
         }
 
@@ -65,6 +68,7 @@ namespace CL.WebAPI.Controllers
         /// <returns>Retorna o cliente inserido.</returns>
         [HttpPost]
         [ProducesResponseType(typeof(ClienteView), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> Post([FromBody] NovoCliente novoCliente)
         {
@@ -110,7 +114,11 @@ namespace CL.WebAPI.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Delete(long id)
         {
-            await clienteManager.DeleteClienteAsync(id);
+            var clienteDeletado = await clienteManager.DeleteClienteAsync(id);
+
+            if (clienteDeletado == null)
+                return NotFound();
+
             return NoContent();
         }
     }

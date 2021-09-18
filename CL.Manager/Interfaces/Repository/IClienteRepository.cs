@@ -6,7 +6,7 @@ namespace CL.Manager.Interfaces.Repository
 {
     public interface IClienteRepository
     {
-        Task DeleteClienteAsync(long id);
+        Task<Cliente> DeleteClienteAsync(long id);
 
         Task<Cliente> GetClienteAsync(long id);
 

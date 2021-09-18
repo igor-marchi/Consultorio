@@ -54,11 +54,12 @@ namespace CL.Data.Repository
             return clienteConsultado;
         }
 
-        public async Task DeleteClienteAsync(long id)
+        public async Task<Cliente> DeleteClienteAsync(long id)
         {
             var clienteConsultado = await GetClienteAsync(id);
             context.Cliente.Remove(clienteConsultado);
             await context.SaveChangesAsync();
+            return clienteConsultado;
         }
     }
 }

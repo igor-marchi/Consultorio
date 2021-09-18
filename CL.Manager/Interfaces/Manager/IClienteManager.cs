@@ -1,5 +1,4 @@
-﻿using CL.Core.Domain;
-using CL.Core.Shared.ModelViews.Cliente;
+﻿using CL.Core.Shared.ModelViews.Cliente;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -7,7 +6,7 @@ namespace CL.Manager.Interfaces.Manager
 {
     public interface IClienteManager
     {
-        Task DeleteClienteAsync(long id);
+        Task<ClienteView> DeleteClienteAsync(long id);
 
         Task<ClienteView> GetClienteAsync(long id);
 
