@@ -10,9 +10,9 @@ namespace CL.Manager.Interfaces.Manager
 
         Task<MedicoView> GetMedicoAsync(int id);
 
-        Task<MedicoView> InsertMedicoAsync(NovoMedico medico);
+        Task<MedicoView> InsertMedicoAsync(NovoMedico novoMedico);
 
-        Task<MedicoView> UpdateMedicoAsync(AlteraMedico medico);
+        Task<MedicoView> UpdateMedicoAsync(AlteraMedico alteraMedico);
 
         Task DeleteMedicoAsync(int id);
     }
