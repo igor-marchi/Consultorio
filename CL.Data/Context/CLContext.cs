@@ -12,6 +12,7 @@ namespace CL.Data.Context
         public DbSet<Telefone> Telefone { get; set; }
         public DbSet<Medico> Medico { get; set; }
         public DbSet<Especialidade> Especialidade { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
 
         public ClContext(DbContextOptions options) : base(options)
         { }
@@ -23,6 +24,7 @@ namespace CL.Data.Context
             modelBuilder.ApplyConfiguration(new ClienteConfiguration());
             modelBuilder.ApplyConfiguration(new EnderecoConfiguration());
             modelBuilder.ApplyConfiguration(new TelefoneConfiguration());
+            modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
         }
     }
 }

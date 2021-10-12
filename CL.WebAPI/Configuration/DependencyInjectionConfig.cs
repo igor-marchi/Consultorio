@@ -13,11 +13,13 @@ namespace CL.WebAPI.Configuration
             // Manager
             services.AddScoped<IClienteManager, ClienteManager>();
             services.AddScoped<IMedicoManager, MedicoManager>();
+            services.AddScoped<IUsuarioManager, UsuarioManager>();
 
             //Repository
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IMedicoRepository, MedicoRepository>();
             services.AddScoped<IEspecialidadeRepository, EspecialidadeRespository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
         }
     }
 }

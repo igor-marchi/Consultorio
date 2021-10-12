@@ -49,16 +49,32 @@ namespace CL.Data.Repository
                 return null;
 
             context.Entry(clienteConsultado).CurrentValues.SetValues(cliente);
-            await context.SaveChangesAsync();
+            clienteConsultado.Endereco = cliente.Endereco;
+            UpdateTelefones(cliente, clienteConsultado);
 
+            await context.SaveChangesAsync();
             return clienteConsultado;
+        }
+
+        private static void UpdateTelefones(Cliente cliente, Cliente clienteConsultado)
+        {
+            clienteConsultado.Telefones.Clear();
+
+            foreach (var telefone in cliente.Telefones)
+            {
+                clienteConsultado.Telefones.Add(telefone);
+            }
         }
 
         public async Task<Cliente> DeleteClienteAsync(long id)
         {
             var clienteConsultado = await GetClienteAsync(id);
-            context.Cliente.Remove(clienteConsultado);
-            await context.SaveChangesAsync();
+            if (clienteConsultado != null)
+            {
+                context.Cliente.Remove(clienteConsultado);
+                await context.SaveChangesAsync();
+            }
+
             return clienteConsultado;
         }
     }

@@ -9,7 +9,8 @@ namespace CL.WebAPI.Configuration
         {
             services.AddAutoMapper(
                 typeof(NovoClienteMappingProfile),
-                typeof(AlteraClienteMappingProfile)
+                typeof(AlteraClienteMappingProfile),
+                typeof(UsuarioMappingProfile)
             );
         }
     }
