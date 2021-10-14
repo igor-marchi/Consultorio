@@ -40,6 +40,28 @@ namespace CL.WebAPI.Configuration
 
                 xmlPath = Path.Combine(AppContext.BaseDirectory, "CL.Core.Shared.xml");
                 configs.IncludeXmlComments(xmlPath);
+
+                configs.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Insira o Bearer token",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                configs.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                            Array.Empty<string>()
+                    }
+                });
             });
 
             services.AddFluentValidationRulesToSwagger();

@@ -1,0 +1,50 @@
+﻿using CL.Data.Services;
+using CL.Manager.Interfaces.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
+namespace CL.WebAPI.Configuration
+{
+    public static class JwtConfig
+    {
+        public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddSingleton<IJwtService, JwtService>();
+
+            var chave = Encoding.ASCII.GetBytes(configuration.GetSection("Jwt:Secret").Value);
+            //var audience = configuration.GetSection("Jwt:Audience").Value;
+            //var issuer = configuration.GetSection("Jwt:Issuer").Value;
+
+            services.AddAuthentication(p =>
+            {
+                p.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                p.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(p =>
+            {
+                p.RequireHttpsMetadata = false; // true em ambiente de prod
+                p.SaveToken = true;
+                p.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(chave),
+                    //ValidateIssuer = true,
+                    //ValidIssuer = issuer,
+                    //ValidateAudience = true,
+                    //ValidAudience = audience
+                    ValidateLifetime = true
+                };
+            });
+        }
+
+        public static void UseJwtConfiguration(this IApplicationBuilder app)
+        {
+            app.UseAuthentication();
+            app.UseAuthorization();
+        }
+    }
+}

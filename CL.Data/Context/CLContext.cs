@@ -13,6 +13,7 @@ namespace CL.Data.Context
         public DbSet<Medico> Medico { get; set; }
         public DbSet<Especialidade> Especialidade { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Funcao> Funcao { get; set; }
 
         public ClContext(DbContextOptions options) : base(options)
         { }

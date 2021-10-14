@@ -20,6 +20,7 @@ namespace CL.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddJwtConfiguration(Configuration);
             services.AddFluentValidationConfiguration();
             services.AddDataBaseConfiguration(Configuration);
             services.AddAutoMapperConfiguration();
@@ -45,7 +46,7 @@ namespace CL.WebAPI
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseJwtConfiguration();
 
             app.UseEndpoints(endpoints =>
             {
