@@ -16,8 +16,8 @@ namespace CL.WebAPI.Configuration
             services.AddSingleton<IJwtService, JwtService>();
 
             var chave = Encoding.ASCII.GetBytes(configuration.GetSection("Jwt:Secret").Value);
-            //var audience = configuration.GetSection("Jwt:Audience").Value;
-            //var issuer = configuration.GetSection("Jwt:Issuer").Value;
+            var audience = configuration.GetSection("Jwt:Audience").Value;
+            var issuer = configuration.GetSection("Jwt:Issuer").Value;
 
             services.AddAuthentication(p =>
             {
@@ -32,10 +32,10 @@ namespace CL.WebAPI.Configuration
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(chave),
-                    //ValidateIssuer = true,
-                    //ValidIssuer = issuer,
-                    //ValidateAudience = true,
-                    //ValidAudience = audience
+                    ValidateIssuer = true,
+                    ValidIssuer = issuer,
+                    ValidateAudience = true,
+                    ValidAudience = audience,
                     ValidateLifetime = true
                 };
             });

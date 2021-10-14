@@ -24,8 +24,8 @@ namespace CL.Data.Services
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var chave = configuration.GetSection("Jwt:Secret").Value;
-            //var audience = configuration.GetSection("Jwt:Audience").Value;
-            //var issuer = configuration.GetSection("Jwt:Issuer").Value;
+            var audience = configuration.GetSection("Jwt:Audience").Value;
+            var issuer = configuration.GetSection("Jwt:Issuer").Value;
             var expires = configuration.GetSection("Jwt:Expires").Value;
             var chaveASCII = Encoding.ASCII.GetBytes(chave);
             var claims = new List<Claim>
@@ -38,8 +38,8 @@ namespace CL.Data.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                //Audience = audience,
-                //Issuer = issuer,
+                Audience = audience,
+                Issuer = issuer,
                 Expires = DateTime.UtcNow.AddMinutes(Convert.ToInt32(expires)),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(chaveASCII), SecurityAlgorithms.HmacSha512Signature)
             };
